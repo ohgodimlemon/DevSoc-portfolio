@@ -1,19 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Around the World Profile</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Latin+Modern+Roman&display=swap">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/37d6505749.js" crossorigin="anonymous"></script>
+
 </head>
-<body>
-  <header>
-    <h1>Welcome to My Profile</h1>
-    <p>Exploring the world, one step at a time.</p>
-  </header>
-  <section>
-    <h2>About Me</h2>
-    <p>I'm passionate about travel, technology, and storytelling.</p>
-  </section>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        background-color: rgb(39, 44, 67);
+    }
+
+    #name {
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        width: fit-content;
+        opacity: 0;
+        border-radius: 5px;
+        border: 3px solid rgb(245, 128, 128);
+        padding: 0px 5px;
+        font-size: 1.5rem;
+
+    }
+
+
+    #timeCont{
+        background-color: white;
+        width: fit-content;
+        font-size: 1.5rem;
+        padding: 5px 5px;
+        border-radius: 5px;
+        border: 3px solid rgb(245, 128, 128);        
+    }
+    
+
+    svg path {
+        cursor: pointer;
+    }
+
+</style>
+
+<body id="body">
+
+    <?xml version="1.0"?>
+
+    <div id="name">
+        <p id="namep">Name</p>
+    </div>
+
+
+
+    <div id="timeCont">
+        <p id="time">Time</p>
+    </div>
+
+    <div id="svg-container" style="width: 100%; height: 50vh; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+        <!-- SVG will be loaded here -->
+    </div>
+    
+    <script>
+        fetch("assets/world.svg")
+            .then(response => response.text())
+            .then(svgContent => {
+                const container = document.getElementById("svg-container");
+                container.innerHTML = svgContent;
+    
+                // Optional: Adjust the SVG scaling via CSS
+                const svgElement = container.querySelector("svg");
+                svgElement.style.width = "100%";
+                svgElement.style.height = "auto"; // Maintain aspect ratio
+                svgElement.style.maxHeight = "100%"; // Fit within the container
+            });
+    </script>
+
 </body>
+
+<script>
+    async function getUser(place) {
+            const api_url = `https://timezone.abstractapi.com/v1/current_time/?api_key=YOUR_API_KEY&location=${place}`
+            
+            const response = await fetch(api_url);
+            
+            const data = await response.json();
+            
+            time = await data.datetime
+            // arr = Array.from(time)
+            // arr.splice(0, 11)
+            // arr.toString()
+            // timezone = (arr.splice(0, 5)).join("");
+            document.getElementById("time").innerText = `${place}'s time = ${time} ${data.timezone_abbreviation}`
+
+    }
+
+    document.querySelectorAll(".allPaths").forEach(e => {
+        e.setAttribute('class', `allPaths ${e.id}`);
+        e.addEventListener("mouseover", function () {
+            window.onmousemove=function (j) {
+                x = j.clientX
+                y = j.clientY
+                document.getElementById('name').style.top = y-60  + 'px'
+                document.getElementById('name').style.left = x +10 + 'px'
+            }
+            const classes=e.className.baseVal.replace(/ /g, '.')         
+            document.querySelectorAll(`.${classes}`).forEach(country =>{
+                country.style.fill = "pink"
+            })
+            document.getElementById("name").style.opacity = 1
+            
+            document.getElementById("namep").innerText = e.id
+        })
+        e.addEventListener("mouseleave", function () {
+            const classes=e.className.baseVal.replace(/ /g, '.')
+            document.querySelectorAll(`.${classes}`).forEach(country =>{
+                country.style.fill = "#ececec"
+            })
+            document.getElementById("name").style.opacity = 0
+        })
+
+        e.addEventListener("click",function(){
+            getUser(e.id)
+        })
+
+    })
+
+    // document.getElementById("searchBtn").addEventListener("click", function () {
+    //     country = document.getElementById("search").value
+    //     document.querySelectorAll(`.allPaths`).forEach(e => {
+    //         e.style.fill = "#ececec"
+    //     })
+    //     document.querySelectorAll(`#${country}`).forEach(e => {
+    //         e.style.fill = "red"
+    //     })
+    // })
+
+</script>
+
 </html>
