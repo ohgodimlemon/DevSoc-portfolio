@@ -15,135 +15,329 @@
         margin: 0;
         padding: 0;
     }
+    @font-face {
+        font-family: 'Public Sans';
+        src: url('https://www.nasa.gov/wp-content/client-mu-plugins/uswds-framework/uswds/fonts/public-sans/PublicSans-Regular.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
 
     body {
+        position: relative;
+        background: black;
+        background-size: cover;
         overflow-x: hidden;
         overflow-y: hidden;
-        background-color: rgb(39, 44, 67);
+        background-color: rgb(0, 0, 0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
     }
 
-    #name {
+    #background-image {
         position: absolute;
-        background-color: rgb(255, 255, 255);
-        width: fit-content;
-        opacity: 0;
-        border-radius: 5px;
-        border: 3px solid rgb(245, 128, 128);
-        padding: 0px 5px;
-        font-size: 1.5rem;
-
+        top: 35vh; 
+        width: 100%;
+        height: 100vh;
+        background: url('assets/Earth.jpg') no-repeat center top;
+        background-size: cover;
+        opacity: 0.45;
+        z-index: 0;
     }
 
 
-    #timeCont{
-        background-color: white;
-        width: fit-content;
-        font-size: 1.5rem;
-        padding: 5px 5px;
-        border-radius: 5px;
-        border: 3px solid rgb(245, 128, 128);        
+    h1 {
+        font-size: 5rem;
+        color: white;
+        font-family: 'Public Sans', Arial;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: typing 3s steps(30, end) forwards, blink 0.5s step-end 1;
+        font-weight: bold;
+        background: linear-gradient(to right, #ff5733, #c2b200, #d147a3);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+
+        
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+
+    /* typing animation */
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
     }
     
-
-    svg path {
-        cursor: pointer;
+    #svg-container {
+        width: 40%;
+        height: 50vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        margin-top: -500px;
+        margin-right: -80px;
     }
 
+    #stop-info {
+        width: 30%;
+        padding: 20px;
+        color: white;
+        font-family: 'Public Sans', Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        margin-left: -900px;
+        margin-top: -40px;
+        z-index: 3;
+        line-height: 1.6;
+    }
+
+
+    #text-content {
+        flex: 1;
+    }
+
+    #next-stop-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-family: 'Public Sans', Arial;
+        background-color: #ff5733;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #next-stop-btn:hover {
+        background-color: #c44222;
+    }
+
+    #stop-description {
+        margin-bottom: 20px;
+    }
+
+    #stop-description2 {
+        margin-bottom: 20px;
+    }
+
+    #stop-image {
+        position: absolute;
+        top: 260px; 
+        right: 760px; 
+        max-width: 215px;
+        height: auto;
+        z-index: 4;
+        pointer-events: none;
+        opacity: 0.85;
+        border-radius: 10px;
+    }
+    #journey {
+        font-size: 1.5rem;
+        color: white;
+        font-family: 'Public Sans', Arial;
+        text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0;
+        animation: typing 3s steps(30, end) forwards, blink 0.5s step-end infinite;
+        font-weight: bold;
+        background: linear-gradient(to right, #ff5733, #ff9e44);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    #stop-description3 {
+        font-size: 1rem;
+        color: white;
+        font-family: 'Public Sans', Arial;
+        text-align: left;
+        font-weight: bold;
+        background: linear-gradient(to right, #ff5733, #ff9e44);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        overflow: visible;
+        white-space: normal;
+    }
+
+    #note {
+        margin-top: 20px;
+        font-size: 0.7rem;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-family: 'Public Sans', Arial;
+        background-color: #0073b1;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-right: 0px;
+        z-index: 10;
+        position: relative;
+    }
+
+    button:hover {
+        background-color: #005582;
+    }
+
+    #linkedin-btn {
+        position: absolute;
+        left: -680px;
+        bottom: -150px;
+        margin-right: 10px;
+    }
+
+    #github-btn {
+        position: absolute;
+        left: -500px;
+        bottom: -150px;
+    }
 </style>
 
 <body id="body">
 
-    <?xml version="1.0"?>
+    <h1 id="title">Around the World in 6 Years.</h1>
+    <div id="background-image"></div>
+    <img id="stop-image" src="assets/india.jpg" alt="India">
+    <div id="stop-info">
+        <h2 id="stop-title">Welcome to my profile</h2>
+        <div id="text-and-image-container">
+            <div id="text-content">
+                <p id="stop-description">
+                    Hi people! I am Vedant. And it's my first time coding in HTML, and coding this has been an incredible 
+                    learning experience (just watched YouTube tutorials A LOT! LOL).
+                </p>
+        
+                <p id="stop-description2">
+                    I am a final-year Computer Science student, and I am majoring in AI. However, I think having the 
+                    traditional software development skills of using HTML/CSS and coding backend using other tools except 
+                    JavaScript is also important, so here I am, eager to learn whilst making friends along the way!
+                </p>
+            </div>
+        </div>
+    
+        <h3 id="journey">About my journey</h3>
+    
+        <p id="stop-description3">
+            I was born in India and spent most of my life, 14 years there. Here is a childhood photo of me :).
+        </p>
 
-    <div id="name">
-        <p id="namep">Name</p>
-    </div>
-
-
-
-    <div id="timeCont">
-        <p id="time">Time</p>
-    </div>
-
-    <div id="svg-container" style="width: 100%; height: 50vh; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-        <!-- SVG will be loaded here -->
+        <p id="note">*check out the changing map btw—cool js script which I developed to change the glowing country!</p>
+    
+        <button id="next-stop-btn">Next Stop</button>
     </div>
     
+
+    <div id="svg-container" style="width: 100%; height: 50vh; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+        <!-- SVG map -->
+    </div>
+
+    <div id="button-container" style="position: relative;">
+        <a id="github-btn" href="https://github.com/ohgodimlemon" target="_blank" style="display: none;">
+            <button>GitHub</button>
+        </a>
+    
+        <a id="linkedin-btn" href="https://www.linkedin.com/in/vedant-chanpura-9450bb277/" target="_blank" style="display: none;">
+            <button>LinkedIn</button>
+        </a>
+    </div>    
     <script>
+        let currentStop = 0;
+        const stops = [
+            {
+                ids: ["IN"],
+                title: "India",
+                image: "assets/india.jpg",
+                journeyDescription: "I was born in India and spent most of my life, 14 years there. Here is a childhood photo of me :)."
+            },
+            {
+                ids: ["AUM", "AUT"], // Tassie and the mainland
+                title: "Australia",
+                image: "assets/australia.jpg",
+                journeyDescription: "In 2019, my family moved here because of my dad's work. and since then I am loving Australia. Especially the Koalas. Here is a lazy picture of a koala which I took:)."
+            }
+        ];
+
         fetch("assets/world.svg")
             .then(response => response.text())
             .then(svgContent => {
                 const container = document.getElementById("svg-container");
                 container.innerHTML = svgContent;
-    
-                // Optional: Adjust the SVG scaling via CSS
+
                 const svgElement = container.querySelector("svg");
                 svgElement.style.width = "100%";
-                svgElement.style.height = "auto"; // Maintain aspect ratio
-                svgElement.style.maxHeight = "100%"; // Fit within the container
+                svgElement.style.height = "auto";
+                svgElement.style.maxHeight = "100%";
+
+                const style = document.createElement("style");
+                style.textContent = `
+                    path {
+                        fill: rgba(12,108,159,255);
+                        filter: drop-shadow(0 0 10px rgba(146,220,229,255));
+                    }
+
+                    #IN {
+                        fill: orange;
+                        filter: drop-shadow(0 0 10px rgba(236,136,76,255));
+                    }
+                `;
+                svgElement.appendChild(style);
             });
+
+            document.getElementById("next-stop-btn").addEventListener("click", () => {
+                currentStop = (currentStop + 1) % stops.length;
+                const stop = stops[currentStop];
+                if (currentStop === 0) {
+                    document.getElementById("next").style.display = "none";
+                }
+                // Update the "About my journey"
+                document.getElementById("stop-description3").textContent = stop.journeyDescription || "";
+
+                // Update stop image
+                document.getElementById("stop-image").src = stop.image;
+
+                // Update the highlighted stop
+                const svgElement = document.querySelector("#svg-container svg");
+                if (svgElement) {
+                    svgElement.querySelectorAll("path").forEach(path => path.style.fill = "rgba(12,108,159,255)");
+
+                    stop.ids.forEach(id => {
+                        const path = svgElement.querySelector(`#${id}`);
+                        if (path) {
+                            path.style.fill = "orange";
+                            path.style.filter = "drop-shadow(0 0 10px rgba(236,136,76,255))";
+                        }
+                    });
+                }
+
+                if (currentStop === stops.length - 1) {
+                    // Hide "Next Stop" button
+                    document.getElementById("next-stop-btn").style.display = "none";
+
+                    document.getElementById("github-btn").style.display = "inline-block";
+                    document.getElementById("linkedin-btn").style.display = "inline-block";
+                }
+            });
+
     </script>
 
 </body>
-
-<script>
-    async function getUser(place) {
-            const api_url = `https://timezone.abstractapi.com/v1/current_time/?api_key=YOUR_API_KEY&location=${place}`
-            
-            const response = await fetch(api_url);
-            
-            const data = await response.json();
-            
-            time = await data.datetime
-            // arr = Array.from(time)
-            // arr.splice(0, 11)
-            // arr.toString()
-            // timezone = (arr.splice(0, 5)).join("");
-            document.getElementById("time").innerText = `${place}'s time = ${time} ${data.timezone_abbreviation}`
-
-    }
-
-    document.querySelectorAll(".allPaths").forEach(e => {
-        e.setAttribute('class', `allPaths ${e.id}`);
-        e.addEventListener("mouseover", function () {
-            window.onmousemove=function (j) {
-                x = j.clientX
-                y = j.clientY
-                document.getElementById('name').style.top = y-60  + 'px'
-                document.getElementById('name').style.left = x +10 + 'px'
-            }
-            const classes=e.className.baseVal.replace(/ /g, '.')         
-            document.querySelectorAll(`.${classes}`).forEach(country =>{
-                country.style.fill = "pink"
-            })
-            document.getElementById("name").style.opacity = 1
-            
-            document.getElementById("namep").innerText = e.id
-        })
-        e.addEventListener("mouseleave", function () {
-            const classes=e.className.baseVal.replace(/ /g, '.')
-            document.querySelectorAll(`.${classes}`).forEach(country =>{
-                country.style.fill = "#ececec"
-            })
-            document.getElementById("name").style.opacity = 0
-        })
-
-        e.addEventListener("click",function(){
-            getUser(e.id)
-        })
-
-    })
-
-    // document.getElementById("searchBtn").addEventListener("click", function () {
-    //     country = document.getElementById("search").value
-    //     document.querySelectorAll(`.allPaths`).forEach(e => {
-    //         e.style.fill = "#ececec"
-    //     })
-    //     document.querySelectorAll(`#${country}`).forEach(e => {
-    //         e.style.fill = "red"
-    //     })
-    // })
-
-</script>
 
 </html>
